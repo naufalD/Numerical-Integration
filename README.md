@@ -22,4 +22,4 @@ where $x_i$ is a uniformly distributed random number. This method however conver
 ## Numerical Integration
 The function to be integrated is a function TheFunction(double x) that is defined in mainwindow.cpp. As it is a 1D integration it accepts a single variable x. An example that evaluates $\int_0^1 x^2+x+1dx$ is shown below.
 ![img](media/integration_comparison.png)
-As can be seen, the first two methods converge to the correct answer while the Monte Carlo method does not converge.
+As can be seen, the first two methods converge to the correct answer while the Monte Carlo method does not converge but does get very close.
