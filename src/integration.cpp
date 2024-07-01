@@ -40,3 +40,22 @@ double monteCarloIntegration(int numberPoints, double start, double end, std::fu
     }
     return (end-start)/numberPoints*sum;
 }
+
+double monacoIntegration(int division, double start, double end, std::function<double(double)> theFunction){
+    int numPoints {1};
+    double sum {theFunction(start)};
+    double current {start};
+    double randomPoint {0};
+    while (current<end){
+        randomPoint = arc4random() / pow(2,32) * ((end-start)/static_cast<double>(division));
+        current = current+randomPoint;
+        if (current>end){
+            sum = sum + theFunction(end);
+        }
+        else{
+            sum = sum+theFunction(current);
+        }
+        numPoints = numPoints+1;
+    }
+    return (end-start)*sum/numPoints;
+}
