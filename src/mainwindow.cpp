@@ -24,8 +24,10 @@ MainWindow::MainWindow(QWidget *parent)
     m_labelMont = new QLabel(this);
     m_labelMont->setText("Monte Carlo: "+QString::number(monteCarloIntegration(1, 0, 1, &theFunction)));
 
-     m_labelMona = new QLabel(this);
-     m_labelMona->setText("Monaco: "+QString::number(monacoIntegration(1, 0, 1, &theFunction)));
+    unsigned int initial1[18] {0};
+    Rng = new sobolDimension(1, initial1, true);
+    m_labelSobol = new QLabel(this);
+    m_labelSobol->setText("Sobol: "+QString::number(sobolIntegration(1, 0, 1, *Rng, &theFunction)));
 
     m_plot = new Plot();
     m_time = 1;
@@ -33,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     nums->addWidget(m_labelTrap);
     nums->addWidget(m_labelSimp);
     nums->addWidget(m_labelMont);
-    nums->addWidget(m_labelMona);
+    nums->addWidget(m_labelSobol);
 
     QHBoxLayout* layout = new QHBoxLayout( this );
     layout->addWidget(m_plot,80);
@@ -46,13 +48,13 @@ void MainWindow::timerEvent( QTimerEvent* ){
     double resultTrap = trapezoidIntegration(m_time, m_start, m_end, &theFunction);
     double resultSimp = simpsonsIntegration(m_time, m_start, m_end, &theFunction);
     double resultMont = monteCarloIntegration(m_time, m_start, m_end, &theFunction);
-    double resultMona = monacoIntegration(m_time, m_start, m_end, &theFunction);
+    double resultSobol = sobolIntegration(m_time, m_start, m_end,*Rng, &theFunction);
 
-    m_plot->updateCurve(m_time, resultTrap, resultSimp, resultMont, resultMona);
+    m_plot->updateCurve(m_time, resultTrap, resultSimp, resultMont, resultSobol);
     m_labelTrap->setText("Trapezoid: "+QString::number(resultTrap));
     m_labelSimp->setText("Simpsons: "+QString::number(resultSimp));
     m_labelMont->setText("Monte Carlo: "+QString::number(resultMont));
-    m_labelMona->setText("Monte Carlo: "+QString::number(resultMona));
+    m_labelSobol->setText("Sobol: "+QString::number(resultSobol));
 
     if (m_time>5000){(void) killTimer(m_idTimer);}
 

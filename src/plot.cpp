@@ -33,7 +33,7 @@ Plot::Plot(QWidget *parent) : QwtPlot(parent)
     m_curveMont->setSamples(m_pointMont);
 
     m_curveMona = new QwtPlotCurve();
-    m_curveMona->setTitle("Monaco");
+    m_curveMona->setTitle("Sobol");
     m_curveMona->setPen(Qt::darkYellow, 1);
     m_curveMona-> setRenderHint( QwtPlotItem::RenderAntialiased, true );
     m_curveMona->setSamples(m_pointMona);

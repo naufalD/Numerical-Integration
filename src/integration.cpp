@@ -1,3 +1,5 @@
+#include "include/quasirandom.h"
+
 #include <functional>
 
 double trapezoidIntegration(int numberTraps, double start, double end, std::function<double(double)> theFunction){
@@ -48,6 +50,28 @@ double monacoIntegration(int division, double start, double end, std::function<d
     double randomPoint {0};
     while (current<end){
         randomPoint = arc4random() / pow(2,32) * ((end-start)/static_cast<double>(division));
+        current = current+randomPoint;
+        if (current>end){
+            sum = sum + theFunction(end);
+        }
+        else{
+            sum = sum+theFunction(current);
+        }
+        numPoints = numPoints+1;
+    }
+    return (end-start)*sum/numPoints;
+}
+
+double sobolIntegration(int division, double start, double end, sobolDimension Rng, std::function<double(double)> theFunction){
+    int numPoints {1};
+    double sum {theFunction(start)};
+    double current {start};
+    double randomPoint {0};
+
+
+    while (current<end){
+        randomPoint = Rng.getPoint() * ((end-start)/static_cast<double>(division));
+        Rng.nextPoint();
         current = current+randomPoint;
         if (current>end){
             sum = sum + theFunction(end);

@@ -17,11 +17,13 @@ SOURCES += \
     src/integration.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
-    src/plot.cpp
+    src/plot.cpp \
+    src/quasirandom.cpp
 
 HEADERS += \
     include/mainwindow.h \
-    include/plot.h
+    include/plot.h \
+    include/quasirandom.h
 
 FORMS +=
 
