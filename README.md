@@ -6,17 +6,28 @@ This program is an implementation of numerical integration methods sing the trap
 ## Numerical Integration
 Integrating numerically involves finding the area under the curve of a function. 
 ### Trapezoid method
-This method involves approximating the area under the curve of the function as a collection of $N$ trapezoids with area $\frac{1}{2}(a+b)h$. The algorithm for this method is then 
+This method involves approximating the area under the curve of the function as a collection of $N$ trapezoids with area $\frac{1}{2}(a+b)h$. The algorithm for this method is then<br/>
+
 $$\int_a^b f(x)dx= \frac{1}{2}\sum_{i=0}^{N-1}(f(a+ih)+f(a+(i+1)h))h$$
+<br/>
+
 where $h=\frac{b-a}{N}$
 ### Simpson's Method
-This method invovles approximating the area under the curve of a function as a collection of $N$ parabolas. The algorithm for this method is
+This method invovles approximating the area under the curve of a function as a collection of $N$ parabolas. The algorithm for this method is<br/>
+
 $$\int_a^b f(x)dx = \sum_{i=0}^{N-1}\left[\frac{4}{3}f(a+ih)+\frac{1}{3}f(a+\frac{3ih}{2})+\frac{4}{3}f((i+1)h)\right]$$
+
 ### Monte Carlo Method
-This method involves making use of the mean value theorem in calculus that states that
+This method involves making use of the mean value theorem in calculus that states that<br/>
+
 $$\int_a^bf(x)dx=(b-a)\langle f \rangle$$
-Where $\langle f\rangle$ is the mean of the function in the interval. By the central limit theorem,
+<br/>
+
+Where $\langle f\rangle$ is the mean of the function in the interval. By the central limit theorem,<br/>
+
 $$\langle f \rangle = \lim_{N\to \infty}\frac{1}{N}\sum_{i=0}^N f(x_i)$$
+<br/>
+
 where $x_i$ is a uniformly distributed random number. This method however converges slower than the above methods. For high dimensional integration however, this method is preferred as it is less computationally intensive. 
 
 ## Numerical Integration
